@@ -48,6 +48,20 @@ class Fila():
         self.randoms += 1
         return (b - a) * random.random() + a
 
+    def aaa(self):
+        if len(self.agenda) == 0:
+            self.chegada(self.tempo)
+        else:
+            next_function_time = min(self.agenda)
+            next_function = self.agenda.pop(next_function_time)
+
+            if next_function == 'saida':
+                self.saida(next_function_time)
+            elif next_function == 'chegada':
+                self.chegada(next_function_time)
+
+        print(f'Tempo: {self.tempo} {self.tempo_estados}')
+
     def run(self, time: float):
         if len(self.agenda) == 0:
             self.chegada(time)
@@ -61,11 +75,11 @@ class Fila():
                 self.chegada(next_function_time)
 
         print(f'Tempo: {self.tempo} {self.tempo_estados}')
-        if not self.end:
-            self.run(self.tempo)
+        while not self.end:
+            self.aaa()
 
 
 if __name__ == '__main__':
-    fila = Fila(1, 3, (1, 2), (3, 6), 7)
+    fila = Fila(1, 5, (2, 4), (3, 5), 10000)
     fila.run(2.0)
-    print(fila.tempo)
+    print('Tempo total: ', fila.tempo)

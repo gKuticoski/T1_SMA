@@ -51,17 +51,16 @@ class Fila():
     def run(self, time: float):
         if len(self.agenda) == 0:
             self.chegada(time)
+        else:
+            next_function_time = min(self.agenda)
+            next_function = self.agenda.pop(next_function_time)
 
-        next_function_time = min(self.agenda)
-        next_function = self.agenda.pop(next_function_time)
-
-        if next_function == 'saida':
-            self.saida(next_function_time)
-        elif next_function == 'chegada':
-            self.chegada(next_function_time)
+            if next_function == 'saida':
+                self.saida(next_function_time)
+            elif next_function == 'chegada':
+                self.chegada(next_function_time)
 
         print(f'Tempo: {self.tempo} {self.tempo_estados}')
-
         if not self.end:
             self.run(self.tempo)
 
